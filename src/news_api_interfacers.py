@@ -58,8 +58,13 @@ if __name__ == "__main__":
     nytSearcher = nytArticleSearcher()
     
     q_and_terms = {'begin_date': '20160101', 'end_date': '20170101', 'facet': 'true'}
-    fq_and_terms = {'news_desk': 'Politics'}
+    fq_and_terms = {'news_desk': ('Politics', 'Science'), 'Material': 'Text'}
 
     q = nytSearcher.base_url + urlencode(fq_and_terms) + '&' + urlencode({'api-key': nytSearcher.api_key})
 
-    print(q)
+    response = requests.get(q)
+
+    text = requests.get("https://www.nytimes.com/aponline/2020/07/30/us/bc-us-film-vintage-box-office.html")
+
+    print(response.url)
+    print(response.status_code)
